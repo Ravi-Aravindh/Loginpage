@@ -7,15 +7,15 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
             margin: 0;
         }
         .login-container {
-            background-color: white;
+            background-color: #fff;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -24,6 +24,7 @@
         }
         h2 {
             margin-bottom: 20px;
+            color: #333;
         }
         input[type="text"], input[type="password"] {
             width: 100%;
@@ -45,4 +46,50 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
-        .er
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" action="your-server-side-script.php" method="POST" onsubmit="return validateForm()">
+            <input type="text" id="username" name="username" placeholder="Enter Username" required><br>
+            <input type="password" id="password" name="password" placeholder="Enter Password" required><br>
+            <input type="submit" value="Login">
+        </form>
+        <p class="error" id="errorMessage"></p>
+    </div>
+
+    <script>
+        // JavaScript to validate the form before submission
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var errorMessage = document.getElementById("errorMessage");
+
+            // Simple validation for non-empty fields
+            if (username === "" || password === "") {
+                errorMessage.textContent = "Both username and password are required!";
+                return false; // Prevent form submission
+            }
+
+            // For demonstration, if credentials are incorrect, show an error
+            // This is just an example. You'd need server-side authentication in a real app.
+            if (username !== "admin" || password !== "password123") {
+                errorMessage.textContent = "Invalid username or password!";
+                return false; // Prevent form submission
+            }
+
+            // Clear error message if validation passes
+            errorMessage.textContent = "";
+            alert("Login successful!");
+            return true;
+        }
+    </script>
+
+</body>
+</html>
